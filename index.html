@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cardio Body Kick Power</title>
+  <meta name="description" content="Cardio Body Kick Power — Sport bien-être, karaté et animations pour tous." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #ffffff;
+      --text: #0f1724;             /* très sombre, lisible */
+      --muted: #6b7280;
+      --primary: #0ea5e9;         /* bleu clair (ton dynamique) */
+      --accent: #ef4444;          /* rouge vif accent */
+      --card: #f8fafc;
+      --radius: 12px;
+      --container: 1100px;
+    }
+
+    /* Reset + base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block;height:auto}
+
+    /* Container */
+    .wrap{max-width:var(--container);margin:0 auto;padding:0 20px}
+
+    /* Navbar */
+    header{
+      position:fixed;left:0;right:0;top:0;
+      backdrop-filter: blur(6px);
+      background: rgba(255,255,255,0.85);
+      border-bottom: 1px solid rgba(15,23,36,0.06);
+      z-index:1000;
+    }
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;height:72px;
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{width:46px;height:46px;object-fit:contain;border-radius:8px}
+    .brand h1{font-size:18px;margin:0;font-weight:700}
+    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;align-items:center}
+    nav a{font-weight:600;color:var(--text);opacity:0.9}
+    .cta{
+      background:linear-gradient(90deg,var(--primary),#38bdf8);
+      color:white;padding:10px 14px;border-radius:10px;font-weight:700;
+      box-shadow:none;border:0;
+    }
+
+    /* Hero */
+    .hero{padding:120px 0 60px}
+    .hero-grid{display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:center}
+    .hero h2{font-size:34px;margin:0 0 12px;line-height:1.05}
+    .hero p{color:var(--muted);margin:0 0 18px}
+    .hero .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;border:0;cursor:pointer}
+    .btn-outline{background:transparent;border:2px solid var(--primary);color:var(--primary);font-weight:700}
+    .card{
+      background:var(--card);padding:18px;border-radius:14px;border:1px solid rgba(15,23,36,0.04)
+    }
+
+    /* Activities */
+    .section{padding:64px 0}
+    .section h3{font-size:22px;margin:0 0 18px}
+    .activities{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .activity{padding:20px;border-radius:12px;background:linear-gradient(180deg,#ffffff, #fbfdff);border:1px solid rgba(15,23,36,0.04)}
+    .activity h4{margin:0 0 8px}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;font-size:13px;font-weight:700;background:rgba(14,165,233,0.08);color:var(--primary)}
+
+    /* About */
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
+    .team{display:flex;gap:12px;align-items:center}
+    .avatar{width:64px;height:64px;border-radius:12px;background:linear-gradient(180deg,#fff,#f1f9ff);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--primary)}
+
+    /* Gallery */
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .gallery img{width:100%;height:160px;object-fit:cover;border-radius:8px}
+
+    /* Contact */
+    .contact-grid{display:grid;grid-template-columns:1fr 380px;gap:24px}
+    form{display:flex;flex-direction:column;gap:10px}
+    input,textarea,select{padding:12px;border-radius:10px;border:1px solid rgba(15,23,36,0.08);font-size:14px}
+    textarea{min-height:120px;resize:vertical}
+    .note{font-size:13px;color:var(--muted)}
+
+    /* Footer */
+    footer{padding:30px 0;border-top:1px solid rgba(15,23,36,0.04);color:var(--muted)}
+
+    /* Back to top */
+    #topBtn{
+      position:fixed;right:18px;bottom:18px;padding:12px 14px;border-radius:50%;border:0;
+      display:none;background:var(--primary);color:white;box-shadow:0 6px 18px rgba(14,165,233,0.18);cursor:pointer;z-index:900;
+    }
+
+    /* Responsive */
+    @media (max-width:1000px){
+      .hero-grid{grid-template-columns:1fr}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+      .contact-grid{grid-template-columns:1fr}
+      .activities{grid-template-columns:repeat(2,1fr)}
+      nav ul{display:none}
+    }
+    @media (max-width:600px){
+      .gallery img{height:120px}
+      .activities{grid-template-columns:1fr}
+    }
+
+    /* Appearance animations */
+    .reveal{opacity:0;transform:translateY(18px);transition:all 600ms cubic-bezier(.16,.85,.24,1)}
+    .reveal.visible{opacity:1;transform:none}
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header>
+    <div class="wrap nav" role="navigation" aria-label="Navigation principale">
+      <div class="brand">
+        <!-- Remplace images/logo.png par ton logo -->
+        <img id="logo" src="images/logo.png" alt="Logo Cardio Body Kick Power" onerror="this.style.display='none'">
+        <div>
+          <h1>Cardio Body Kick Power</h1>
+          <div style="font-size:12px;color:var(--muted)">Sport • Bien-être • Karaté</div>
+        </div>
+      </div>
+
+      <nav aria-label="Menu principal">
+        <ul>
+          <li><a href="#home">Accueil</a></li>
+          <li><a href="#activites">Activités</a></li>
+          <li><a href="#about">L'association</a></li>
+          <li><a href="#gallery">Galerie</a></li>
+          <li><a href="#contact" class="cta">Contact / Inscription</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section id="home" class="hero reveal">
+      <div class="wrap hero-grid">
+        <div>
+          <h2>Cardio Body Kick Power</h2>
+          <p>Le sport bien-être et l'initiation au karaté pour tous les âges. Cours collectifs, séances bien-être et animations anniversaire — pour bouger, se défouler et s'épanouir.</p>
+
+          <div class="actions">
+            <a class="btn cta" href="#contact" title="S'inscrire">S'inscrire</a>
+            <a class="btn btn-outline" href="#activites" title="Nos activités">Voir les activités</a>
+          </div>
+
+          <div style="margin-top:18px" class="note">Horaires & tarifs disponibles sur demande — sessions enfants et adultes.</div>
+        </div>
+
+        <aside class="card" aria-hidden="false">
+          <h4 style="margin:0 0 8px">Prochaine séance découverte</h4>
+          <div style="font-weight:700">Samedi 15h — Dojo Croix-Rouge</div>
+          <p style="margin:10px 0 0;color:var(--muted)">Séance gratuite pour les nouveaux inscrits — places limitées.</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ACTIVITIES -->
+    <section id="activites" class="section reveal">
+      <div class="wrap">
+        <h3>Nos activités</h3>
+        <div class="activities">
+          <article class="activity">
+            <div class="pill">Sport bien-être</div>
+            <h4>Cardio & Renforcement</h4>
+            <p class="note">Séances adaptées, cardio-training, renforcement musculaire et mobilité. Accessible à tous niveaux.</p>
+          </article>
+
+          <article class="activity">
+            <div class="pill">Karaté</div>
+            <h4>Initiation & Perfectionnement</h4>
+            <p class="note">Cours encadrés par un moniteur diplômé — enfants (6+) et adultes. Respect, technique et esprit d'équipe.</p>
+          </article>
+
+          <article class="activity">
+            <div class="pill">Anniversaires</div>
+            <h4>Animations & Jeux</h4>
+            <p class="note">Organisation d'anniversaires sportifs : jeux, ateliers découverte et mini-tournois sur-mesure.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section reveal">
+      <div class="wrap about-grid">
+        <div>
+          <h3>Qui sommes-nous ?</h3>
+          <p class="note">Association locale engagée pour le bien-être par le sport. Nous proposons des séances variées pour tout public, un encadrement diplômé et des événements conviviaux toute l'année.</p>
+
+          <div style="margin-top:14px" class="team">
+            <div class="avatar">CE</div>
+            <div>
+              <div style="font-weight:700">Fanny Ely — Coordinatrice</div>
+              <div style="font-size:13px;color:var(--muted)">Diplômée éducatrice sportive, karatéka d'expérience</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 style="margin-top:0">Nos valeurs</h3>
+          <ul style="padding-left:18px;color:var(--muted)">
+            <li>Accessibilité et bienveillance</li>
+            <li>Esprit d'équipe et respect</li>
+            <li>Énergie, plaisir et progrès</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="section reveal">
+      <div class="wrap">
+        <h3>Galerie</h3>
+        <p class="note">Photos des séances et événements — remplace ces images par les tiennes dans le dossier <code>/images/</code>.</p>
+
+        <div class="gallery" aria-hidden="false">
+          <img src="https://images.unsplash.com/photo-1554284126-aa88f22d8dfe?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=0b9b3b6efc6c0a8af5dd6c9f9e2d3f2e" alt="Séance cardio en groupe" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1546484959-f8a58d50e8c8?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=6b1b6f4f1c1b7c8de0c6f2c2f4f6b7e8" alt="Entraînement karaté" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=3b9d6c1e4e1c4a7a5b6c9d6e4a1b0f3c" alt="Atelier enfants" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1526403224742-4e6b9b9b8bd3?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=8b7d6f9a3c4d5e6f7a8b9c0d1e2f3a4b" alt="Tournoi amical" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1543975200-573b1b4e6c4b?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f" alt="Échauffement collectif" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=b2c3d4e5f6a7b8c9d0e1f0a9b8c7d6e5" alt="Remise de diplômes" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section reveal">
+      <div class="wrap">
+        <h3>Contact & Inscription</h3>
+        <div class="contact-grid">
+          <div>
+            <p class="note">Remplis le formulaire ci-contre pour une demande d'information ou pour t'inscrire à une séance découverte. Tu peux aussi nous écrire à <strong>contact@cardiobody.fr</strong> (remplace par ta vraie adresse).</p>
+
+            <h4>Infos pratiques</h4>
+            <ul style="color:var(--muted);padding-left:18px">
+              <li>Lieu : Dojo Croix-Rouge</li>
+              <li>Horaires : Voir planning (nous contacter)</li>
+              <li>Tarifs : à partir de XX € / mois (réduction association)</li>
+            </ul>
+          </div>
+
+          <aside class="card">
+            <!-- Formulaire : remplacer YOUR_FORMSPREE_ENDPOINT par ton endpoint Formspree -->
+            <form id="contactForm" method="POST" action="https://formspree.io/f/YOUR_FORMSPREE_ENDPOINT">
+              <label for="name">Nom complet</label>
+              <input id="name" name="name" type="text" placeholder="Prénom Nom" required>
+
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="ton@mail.com" required>
+
+              <label for="phone">Téléphone (optionnel)</label>
+              <input id="phone" name="phone" type="tel" placeholder="06 12 34 56 78">
+
+              <label for="message">Message / Demande</label>
+              <textarea id="message" name="message" placeholder="Je souhaite m'inscrire à..." required></textarea>
+
+              <div style="display:flex;gap:10px;align-items:center;justify-content:space-between;margin-top:6px">
+                <div class="note" style="font-size:12px">En envoyant, vous acceptez d'être contacté.e.</div>
+                <button type="submit" class="btn cta">Envoyer</button>
+              </div>
+
+              <div id="formStatus" style="margin-top:8px;color:var(--muted);font-size:13px"></div>
+            </form>
+
+            <p style="margin-top:12px;font-size:13px;color:var(--muted)">Si tu n'as pas Formspree, remplace l'attribut <code>action</code> par <code>javascript</code> (voir instructions ci-dessous).</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- BACK TO TOP -->
+  <button id="topBtn" aria-label="Haut de page">↑</button>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap" style="display:flex;justify-content:space-between;align-items:center">
+      <div>© <strong>Cardio Body Kick Power</strong> — Tous droits réservés</div>
+      <div style="color:var(--muted);font-size:13px">Conception : site one-page | Remplace les contenus par les tiens</div>
+    </div>
+  </footer>
+
+  <script>
+    /* Smooth scroll for internal links */
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', function(e){
+        const target = document.querySelector(this.getAttribute('href'));
+        if(target){
+          e.preventDefault();
+          window.scrollTo({top: target.getBoundingClientRect().top + window.scrollY - 68, behavior:'smooth'});
+        }
+      });
+    });
+
+    /* IntersectionObserver for reveal on scroll */
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, {threshold:0.12});
+    reveals.forEach(r=>io.observe(r));
+
+    /* Back to top button */
+    const topBtn = document.getElementById('topBtn');
+    window.addEventListener('scroll', ()=>{
+      if(window.scrollY > 300) topBtn.style.display = 'block';
+      else topBtn.style.display = 'none';
+    });
+    topBtn.addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
+
+    /* Contact form handling: submission + friendly feedback.
+       By default the form 'action' points to Formspree. If user hasn't set it,
+       the script will try fetch() to the action and show status.
+    */
+    const form = document.getElementById('contactForm');
+    const status = document.getElementById('formStatus');
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      status.textContent = 'Envoi en cours...';
+      const action = form.getAttribute('action') || '';
+
+      // If user left the placeholder, help with mailto fallback
+      if(action.includes('YOUR_FORMSPREE_ENDPOINT')){
+        // Show instructions
+        status.innerHTML = 'Le formulaire nécessite un endpoint (ex: Formspree). Remplace <code>YOUR_FORMSPREE_ENDPOINT</code> dans le code HTML par ton identifiant Formspree, ou contacte: <a href="mailto:contact@cardiobody.fr">contact@cardiobody.fr</a>';
+        return;
+      }
+
+      // Try to POST with Fetch to the action URL
+      try{
+        const data = new FormData(form);
+        const res = await fetch(action, {
+          method: form.method || 'POST',
+          body: data,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        if(res.ok){
+          status.style.color = 'green';
+          status.textContent = "Message envoyé — merci ! Nous revenons vers toi rapidement.";
+          form.reset();
+        } else {
+          const json = await res.json().catch(()=>null);
+          status.style.color = 'crimson';
+          status.textContent = json && json.error ? json.error : "Erreur lors de l'envoi. Vérifie ta configuration.";
+        }
+      }catch(err){
+        status.style.color = 'crimson';
+        status.textContent = "Problème d'envoi (connexion). Utilise l'email : contact@cardiobody.fr";
+      }
+    });
+
+    /* Accessibility: focus outline for keyboard users */
+    document.body.addEventListener('keydown', (e)=> {
+      if(e.key === 'Tab') document.documentElement.style.scrollBehavior = 'smooth';
+    });
+
+  </script>
+</body>
+</html>
